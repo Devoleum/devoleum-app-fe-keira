@@ -12,8 +12,6 @@ import eth_test_off from "../../imgs/eth_test_off.jpg";
 import eth_test_on from "../../imgs/eth_test_on.jpg";
 import algo_main_off from "../../imgs/algo_main_off.jpg";
 import algo_main_on from "../../imgs/algo_main_on.jpg";
-import algo_test_off from "../../imgs/algo_test_off.jpg";
-import algo_test_on from "../../imgs/algo_test_on.jpg";
 import git_off from "../../imgs/git_off.jpg";
 import git_on from "../../imgs/git_on.jpg";
 import hash_off from "../../imgs/hash_off.jpg";
@@ -21,6 +19,7 @@ import hash_on from "../../imgs/hash_on.jpg";
 import { IStep } from "../../models/ISteps";
 import { getOnce } from "../../utils/fetchData";
 import axios from "axios";
+import { URL_PREFIX_ENV } from "../../utils/constants";
 
 const strings = new LocalizedStrings({
   en: {
@@ -48,7 +47,7 @@ const StepScreen = () => {
 
   const getItems = async () => {
     try {
-      const result = await axios.get(`/api/steps/${stepId}`);
+      const result = await axios.get(URL_PREFIX_ENV + `/api/steps/${stepId}`);
       const step_data = await getOnce(result.data);
       const step = { ...result.data, data: step_data };
       setDevoleumStep(step);

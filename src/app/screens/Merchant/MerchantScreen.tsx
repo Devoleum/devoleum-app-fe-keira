@@ -8,6 +8,7 @@ import LocalizedStrings from "react-localization";
 import { IHistory } from "../../models/IHistory";
 import { getIterate, getMerchant, getOnce } from "../../utils/fetchData";
 import axios from "axios";
+import { URL_PREFIX_ENV } from "../../utils/constants";
 
 const MerchantScreen = () => {
   const { id } = useParams();
@@ -35,7 +36,9 @@ const MerchantScreen = () => {
 
   const getItems = async () => {
     try {
-      const result = await axios.get(`/api/histories/merchant/${id}`);
+      const result = await axios.get(
+        URL_PREFIX_ENV + `/api/histories/merchant/${id}`
+      );
       const histories = (await getIterate(result.data)) as IHistory[];
       setHistories(histories);
     } catch (error) {

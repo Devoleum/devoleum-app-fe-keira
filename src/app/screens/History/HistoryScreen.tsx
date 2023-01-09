@@ -9,6 +9,7 @@ import { IStep } from "../../models/ISteps";
 import { getIterate, getOnce } from "../../utils/fetchData";
 import { IHistory } from "../../models/IHistory";
 import axios, { Axios } from "axios";
+import { URL_PREFIX_ENV } from "../../utils/constants";
 
 const strings = new LocalizedStrings({
   en: {
@@ -35,7 +36,9 @@ const HistoryScreen: React.FC = () => {
 
   const getItems = async (id: string) => {
     try {
-      const result = await axios.get(`/api/steps/history/${id}`);
+      const result = await axios.get(
+        URL_PREFIX_ENV + `/api/steps/history/${id}`
+      );
       const steps = (await getIterate(result.data, true)) as IStep[];
       setSteps(steps);
     } catch (error) {
@@ -46,7 +49,7 @@ const HistoryScreen: React.FC = () => {
 
   const getHistory = async (id: string) => {
     try {
-      const result = await axios.get(`/api/histories/${id}`);
+      const result = await axios.get(URL_PREFIX_ENV + `/api/histories/${id}`);
       const history_data = (await getOnce(
         result.data,
         true
